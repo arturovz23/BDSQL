@@ -1,4 +1,10 @@
- CREATE TABLE productos (
+-- Crear la base de datos
+CREATE DATABASE tienda_online;
+
+-- Usar la base de datos
+/*USE tienda_online;*/
+
+CREATE TABLE productos (
     id_producto INT PRIMARY KEY,
     nombre VARCHAR(50),
     categoria VARCHAR(50),
