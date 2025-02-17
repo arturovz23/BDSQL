@@ -4,7 +4,7 @@ USE Universidad;
 
 -- Creación de la tabla de estudiantes
 CREATE TABLE Estudiantes (
-    id_estudiante INT PRIMARY KEY AUTO_INCREMENT,
+    id_estudiante INT PRIMARY KEY IDENTITY,
     nombre VARCHAR(100),
     carrera VARCHAR(100)
 );
