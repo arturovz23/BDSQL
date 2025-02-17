@@ -11,7 +11,7 @@ CREATE TABLE Estudiantes (
 
 -- Creación de la tabla de calificaciones
 CREATE TABLE Calificaciones (
-    id_calificacion INT PRIMARY KEY AUTO_INCREMENT,
+    id_calificacion INT PRIMARY KEY IDENTITY,
     id_estudiante INT,
     materia VARCHAR(100),
     nota DECIMAL(5,2),
@@ -25,3 +25,16 @@ INSERT INTO Estudiantes (nombre, carrera) VALUES
 ('José Ramírez', 'Ingeniería en Sistemas'),
 ('Ana Fernández', 'Ingeniería en Sistemas'),
 ('Pedro Gómez', 'Ingeniería en Datos');
+
+-- Inserción de datos en la tabla Calificaciones
+INSERT INTO Calificaciones (id_estudiante, materia, nota) VALUES
+(1, 'Bases de Datos', 85),
+(1, 'Programación Avanzada', 78),
+(2, 'Bases de Datos', 92),
+(2, 'Programación Avanzada', 88),
+(3, 'Bases de Datos', 76),
+(3, 'Programación Avanzada', 50),
+(4, 'Bases de Datos', 45),
+(4, 'Programación Avanzada', 90),
+(5, 'Bases de Datos', 95),
+(5, 'Programación Avanzada', 60);
