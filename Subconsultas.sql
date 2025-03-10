@@ -1,40 +1,57 @@
--- Creación de la base de datos
-CREATE DATABASE Universidad;
-USE Universidad;
+CREATE DATABASE TiendaOnline;
+USE TiendaOnline;
 
--- Creación de la tabla de estudiantes
-CREATE TABLE Estudiantes (
-    id_estudiante INT PRIMARY KEY IDENTITY,
+CREATE TABLE Clientes (
+    id_cliente INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100),
-    carrera VARCHAR(100)
+    ciudad VARCHAR(50)
 );
 
--- Creación de la tabla de calificaciones
-CREATE TABLE Calificaciones (
-    id_calificacion INT PRIMARY KEY IDENTITY,
-    id_estudiante INT,
-    materia VARCHAR(100),
-    nota DECIMAL(5,2),
-    FOREIGN KEY (id_estudiante) REFERENCES Estudiantes(id_estudiante)
+CREATE TABLE Pedidos (
+    id_pedido INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT,
+    fecha DATE,
+    total DECIMAL(10,2),
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente)
 );
 
--- Inserción de datos en la tabla Estudiantes
-INSERT INTO Estudiantes (nombre, carrera) VALUES
-('Carlos Pérez', 'Ingeniería en Software'),
-('María López', 'Ingeniería en Software'),
-('José Ramírez', 'Ingeniería en Sistemas'),
-('Ana Fernández', 'Ingeniería en Sistemas'),
-('Pedro Gómez', 'Ingeniería en Datos');
+CREATE TABLE Productos (
+    id_producto INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    precio DECIMAL(10,2)
+);
 
--- Inserción de datos en la tabla Calificaciones
-INSERT INTO Calificaciones (id_estudiante, materia, nota) VALUES
-(1, 'Bases de Datos', 85),
-(1, 'Programación Avanzada', 78),
-(2, 'Bases de Datos', 92),
-(2, 'Programación Avanzada', 88),
-(3, 'Bases de Datos', 76),
-(3, 'Programación Avanzada', 50),
-(4, 'Bases de Datos', 45),
-(4, 'Programación Avanzada', 90),
-(5, 'Bases de Datos', 95),
-(5, 'Programación Avanzada', 60);
+CREATE TABLE DetallesPedido (
+    id_detalle INT PRIMARY KEY AUTO_INCREMENT,
+    id_pedido INT,
+    id_producto INT,
+    cantidad INT,
+    FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido),
+    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
+);
+
+-- Insertando Datos
+INSERT INTO Clientes (nombre, ciudad) VALUES
+('Ana Pérez', 'Madrid'),
+('Juan García', 'Barcelona'),
+('Luis Rodríguez', 'Valencia'),
+('Sofía Martínez', 'Madrid');
+
+INSERT INTO Pedidos (id_cliente, fecha, total) VALUES
+(1, '2024-03-01', 120.50),
+(2, '2024-03-05', 300.00),
+(3, '2024-03-07', 150.75),
+(1, '2024-03-10', 200.00);
+
+INSERT INTO Productos (nombre, precio) VALUES
+('Laptop', 800.00),
+('Mouse', 20.00),
+('Teclado', 50.00),
+('Monitor', 150.00);
+
+INSERT INTO DetallesPedido (id_pedido, id_producto, cantidad) VALUES
+(1, 2, 2),
+(1, 3, 1),
+(2, 1, 1),
+(3, 4, 2),
+(4, 3, 3);
