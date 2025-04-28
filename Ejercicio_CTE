@@ -1,23 +1,23 @@
---CREATE DATABASE DB_Ventas;
+CREATE DATABASE DB_Ventas;
 USE DB_Ventas;
 
 -- Tabla de Vendedores
-/*CREATE TABLE Vendedores (
+CREATE TABLE Vendedores (
     VendedorID INT PRIMARY KEY,
     Nombre NVARCHAR(50),
     Apellido NVARCHAR(50),
     Zona NVARCHAR(50)
-);*/
+);
 
 -- Tabla de Clientes
-/*CREATE TABLE Clientes (
+CREATE TABLE Clientes (
     ClienteID INT PRIMARY KEY,
     Nombre NVARCHAR(50),
     Ciudad NVARCHAR(50)
-);*/
+);
 
 -- Tabla de Ventas
-/*CREATE TABLE Ventas (
+CREATE TABLE Ventas (
     VentaID INT PRIMARY KEY,
     VendedorID INT,
     ClienteID INT,
@@ -25,53 +25,27 @@ USE DB_Ventas;
     Monto DECIMAL(10,2),
     FOREIGN KEY (VendedorID) REFERENCES Vendedores(VendedorID),
     FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
-);*/
+);
 
 -- Insertar datos en Vendedores
-/*INSERT INTO Vendedores (VendedorID, Nombre, Apellido, Zona) VALUES
+INSERT INTO Vendedores (VendedorID, Nombre, Apellido, Zona) VALUES
 (1, 'Ana', 'García', 'Norte'),
 (2, 'Luis', 'Pérez', 'Sur'),
 (3, 'María', 'López', 'Este'),
-(4, 'Carlos', 'Sánchez', 'Oeste');*/
+(4, 'Carlos', 'Sánchez', 'Oeste');
 
 -- Insertar datos en Clientes
-/*INSERT INTO Clientes (ClienteID, Nombre, Ciudad) VALUES
+INSERT INTO Clientes (ClienteID, Nombre, Ciudad) VALUES
 (1, 'Cliente Uno', 'Monterrey'),
 (2, 'Cliente Dos', 'Guadalajara'),
 (3, 'Cliente Tres', 'Ciudad de México'),
-(4, 'Cliente Cuatro', 'Puebla');*/
+(4, 'Cliente Cuatro', 'Puebla');
 
 -- Insertar datos en Ventas
-/*INSERT INTO Ventas (VentaID, VendedorID, ClienteID, Fecha, Monto) VALUES
+INSERT INTO Ventas (VentaID, VendedorID, ClienteID, Fecha, Monto) VALUES
 (1, 1, 1, '2024-01-15', 5000.00),
 (2, 2, 2, '2024-02-20', 7000.00),
 (3, 3, 3, '2024-03-05', 2000.00),
 (4, 1, 4, '2024-04-10', 4500.00),
 (5, 4, 1, '2024-05-22', 6000.00),
-(6, 2, 3, '2024-06-12', 8000.00);*/
-
-WITH VentasAltas AS (
-    SELECT VentaID, VendedorID, ClienteID, Fecha, Monto
-    FROM Ventas
-    WHERE Monto > 5000
-)
-SELECT * FROM VentasAltas;
-
-WITH TotalVentasPorVendedor AS (
-    SELECT VendedorID, SUM(Monto) AS TotalVentas
-    FROM Ventas
-    GROUP BY VendedorID
-)
-SELECT v.Nombre, v.Apellido, t.TotalVentas
-FROM TotalVentasPorVendedor t
-JOIN Vendedores v ON t.VendedorID = v.VendedorID;
-
-WITH ComprasFrecuentes AS (
-    SELECT ClienteID, COUNT(*) AS NumeroDeCompras
-    FROM Ventas
-    GROUP BY ClienteID
-    HAVING COUNT(*) > 1
-)
-SELECT c.Nombre, c.Ciudad, cf.NumeroDeCompras
-FROM ComprasFrecuentes cf
-JOIN Clientes c ON cf.ClienteID = c.ClienteID;
+(6, 2, 3, '2024-06-12', 8000.00);
